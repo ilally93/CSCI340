@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int main(int argc, char *argc[]){
+int main(int argc, char *argv[]){
 
   // Checks for correct number of parameters
   if(argc != 2){
@@ -11,7 +11,23 @@ int main(int argc, char *argc[]){
     exit(1);
   }
 
-  char *memSize = malloc(argv[1]);
-  free(memSize);
+  int size = atoi(argv[1]);
+
+  // Allocate block of memory the size of parameter.
+  char *blockMem = malloc(size);
+
+  memset(blockMem, 0, size);
+  printf("%p\n", &blockMem);
+
+  char **point = &blockMem;
+  //printf("%p\n", point);
+
+  for(int i = 0; i < size; i++){
+    printf("%x", point);
+    point++;
+  }
+
+  // Free the memory
+  free(blockMem);
 
 }
