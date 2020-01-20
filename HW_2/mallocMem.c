@@ -17,13 +17,13 @@ int main(int argc, char *argv[]){
   char *blockMem = malloc(size);
 
   memset(blockMem, 0, size);
-  printf("%p\n", &blockMem);
+  printf("The address of the memory block: %p\n", &blockMem);
 
-  char **point = &blockMem;
-  //printf("%p\n", point);
+
+  char *point = blockMem;
 
   for(int i = 0; i < size; i++){
-    printf("%x", point);
+    printf("Content %d: %x\n", i, *point);
     point++;
   }
 
