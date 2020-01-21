@@ -10,6 +10,7 @@ struct procInfStruc{
   int processId;
   char *processContext[6];
   char processStatus;
+  struct procInfStruc *prev;
   struct procInfStruc *next;
 
 };
@@ -60,3 +61,15 @@ Content 3: 0
 Content 4: 0
 
 3. Process Transitions
+   Ready --> Suspended and Running
+    Ready may go to suspended if the scheduler decides that a different process
+      had priority.
+    Ready will move to running if the process is executed.
+   Running --> Ready
+    Running to ready may happen if the process is waiting for the scheduler to
+      decide what to do.
+   Suspended -->  Ready
+    Suspended to ready will occur when there is room for the process to move
+      into main memory.
+
+4.  

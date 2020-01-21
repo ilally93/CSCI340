@@ -7,6 +7,7 @@ struct procInfStruc{
   int processId;
   char *processContext[6];
   char processStatus;
+  struct procInfStruc *prev;
   struct procInfStruc *next;
 
 };
