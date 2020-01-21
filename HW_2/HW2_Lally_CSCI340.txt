@@ -72,4 +72,7 @@ Content 4: 0
     Suspended to ready will occur when there is room for the process to move
       into main memory.
 
-4.  
+4.  Scheduling Policies
+    CFS
+      The algorithm for the Completely Fair Scheduler (CFS) 
+    BFS
