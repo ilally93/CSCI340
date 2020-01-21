@@ -1,3 +1,22 @@
+
+1. Lists and Structures
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+struct procInfStruc{
+
+  int processId;
+  char *processContext[6];
+  char processStatus;
+  struct procInfStruc *next;
+
+};
+
+
+2. C Pointers and References
+
 #include <stdio.h>
 #include <memory.h>
 #include <string.h>
@@ -31,3 +50,13 @@ int main(int argc, char *argv[]){
   free(blockMem);
 
 }
+
+2. Sample Output:
+./mallocMem 4
+The address of the memory block: 0x7ffe816a4e08
+Content 1: 0
+Content 2: 0
+Content 3: 0
+Content 4: 0
+
+3. Process Transitions
