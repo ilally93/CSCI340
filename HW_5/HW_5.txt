@@ -1,0 +1,37 @@
+8131
+8176
+
+1.a)
+  libnss is a set of open source crypto library where nss stands
+  for network security services.
+
+  libc is the standard C library that has the basic functions
+  used by C.
+
+  libdl functions are now within libc, however, libdl stays
+  around for backwards compatibility.
+
+  libtinfo is an offshoot of terminfo which contains functions
+  of the terminal.
+
+  b)
+    Apart from the virtual page numbers, they are almost
+    identical apart from one anon being 4K different and
+    therefore the total is different by 4K.
+    There is an anon that shares the same address, all others
+    are different.
+
+2.a)
+
+  b)
+
+  c)
+    a.
+    b.
+      i.
+
+3.a)
+
+  b)
+
+  c)
