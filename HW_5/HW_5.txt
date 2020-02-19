@@ -2,17 +2,17 @@
 8176
 
 1.a)
-  libnss is a set of open source crypto library where nss stands
-  for network security services.
+    libnss is a set of open source crypto library where nss stands
+    for network security services.
 
-  libc is the standard C library that has the basic functions
-  used by C.
+    libc is the standard C library that has the basic functions
+    used by C.
 
-  libdl functions are now within libc, however, libdl stays
-  around for backwards compatibility.
+    libdl functions are now within libc, however, libdl stays
+    around for backwards compatibility.
 
-  libtinfo is an offshoot of terminfo which contains functions
-  of the terminal.
+    libtinfo is an offshoot of terminfo which contains functions
+    of the terminal.
 
   b)
     Apart from the virtual page numbers, they are almost
@@ -31,7 +31,15 @@
       i.
 
 3.a)
+    The counter stops matching the intended value at 10,000.
 
   b)
+    I think that it takes such large numbers, because initially
+    each thread is just about in sync, but the tiny difference
+    between them will start to get larger until there is a
+    difference.
 
   c)
+    Increasing the number of cores would cause the problem
+    to occur sooner, due to using more threads so there are
+    more options for things to overlap.
