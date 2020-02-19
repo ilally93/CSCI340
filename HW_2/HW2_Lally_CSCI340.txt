@@ -74,5 +74,16 @@ Content 4: 0
 
 4.  Scheduling Policies
     CFS
-      The algorithm for the Completely Fair Scheduler (CFS) 
+      The algorithm for the Completely Fair Scheduler (CFS) uses time slices and
+    is priority based.  The time slices are fixed, so if the process is not
+    completed in that time it is rescheduled.  The higher priority processes
+    are the ones that will take less time and thus end up at the front of the
+    line.  CFS uses scheduling domains where processes can be balanced between
+    different processors and scheduling groups which groups processes together
+    if they are similar.
+
     BFS
+      The algorithm for the Brain Fucker Scheduler (BFS) uses priority classes,
+    where processes running cannot be interrupted by lower priority processes.
+    However, processes that end up in the ready state and have higher priority
+    than the process currently running can interrupt that process.
