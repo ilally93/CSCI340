@@ -22,13 +22,39 @@
     are different.
 
 2.a)
+    When switching, with threads the address space does not
+    need to change.  Another difference is when using threads,
+    there are multiple stacks and do not have to be located
+    directly on the bottom versus processes having only one
+    stack.
 
   b)
+    Using multiple threads in a program may increase the time
+    efficiency, both because just running at the same time
+    and the other reason is not having to wait for the
+    process to finish an action that would be blocking it.
 
   c)
-    a.
-    b.
-      i.
+    a. command = /usr/lib/snapd/snapd
+    b. pid = 919
+      i. Thread pid:
+            919
+            1133
+            1141
+            1144
+            1145
+            1146
+            1261
+            1266
+            1268
+            1301
+            1309
+            1310
+            1350
+            1397
+            1430
+            4400
+            8585
 
 3.a)
     The counter stops matching the intended value at 10,000.
