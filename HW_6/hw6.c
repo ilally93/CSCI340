@@ -5,12 +5,11 @@
 
 volatile int counter = 0;
 
-char stringCreate(int length, char *genString){
-    if(counter < length){
-        genString[counter] = '1';
+char stringCreate(int len, char *str){
+    while(counter < len){
+        str[counter] = '1';
         counter++;
     }
-    return genString;
 }
 
 
@@ -28,10 +27,10 @@ int main(int argc, char *argv[]){
     //printf("Length: %d   String: %s\n", length, genString);
 
     //free(genString);
-    char args = {length, genString};
+    char args = {(length-1), genString};
     pthread_t thread[atoi(argv[1])];
 
-    for(int i = 0; i < stoi(argv[1]); i++){
+    for(int i = 0; i < atoi(argv[1]); i++){
         pthread_create(thread + i, NULL, stringCreate, args);
     }
 
