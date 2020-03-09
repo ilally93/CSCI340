@@ -1,0 +1,46 @@
+c) The final count in each case should be 30.  For each of the programs:
+    i. If this is not true, explain why it isn't correct.
+    ii. If it is true, explain why it is correct.
+
+        It is not true.
+            flag.s
+                1. 26
+                2. 26
+                3. 26
+
+            test-and-set.s
+                1. 28
+                2. 29
+                3. 30
+
+            yield.s
+                1. 30
+                2. 30
+                3. 30
+
+        flag.s does not use mutex, like the test-and-set.s and yield.s use,
+        therefore, the count for flag.s does not end up being 30.
+
+        The count for test-and-set.s does not come out to 30 for all threads,
+        because it does not use yield like yield.s does.
+
+        The count for yield.s does end up being 30 for all threads, because
+        it uses both mutex and yield.
+
+d) What is the total number of instructions executed for each program.
+   Why do you think it varies as much as it does?
+
+    flag.s = 405
+    test-and-set.s = 597
+    yield.s = 561
+
+    The number of instructions are so off from each other due to stopping at
+    different places in code and the different types of jumps that are used
+    for each program.
+
+e) Run the programs again varying the -i parameter.  For each program explain:
+    i. What happens to the count value?
+        The count value seems to go to 30 as the -i parameter goes up.
+
+    ii. Does the number of instructions executed change?
+        The number of instructions does change as the -i parameter is changed.
