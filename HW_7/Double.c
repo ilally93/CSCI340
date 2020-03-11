@@ -57,7 +57,12 @@ void List_Insert(list_t *L,
 
     new->key = key;
     pthread_mutex_lock(&L->lock);
-    new->next = L->head;
+    if(L->head != NULL){
+        new->next = L->head;
+    }
+    else{
+        new->next = L->head->next;
+    }
     new->prev = NULL;
     L->head = new;
 
@@ -80,7 +85,12 @@ void List_Append(list_t *L,
     new->key = key;
     printf("Key during Append: %d\n", key);
     pthread_mutex_lock(&L->lock);
-    new->prev = L->tail;
+    if(L->tail != NULL){
+        new->prev = L->tail;
+    }
+    else{
+        new->prev = L->tail->prev;
+    }
     new->next = NULL;
     L->tail = new;
     pthread_mutex_unlock(&L->lock);
@@ -146,5 +156,8 @@ int main()
             printf("Node %d Append Failed\n\n", key);
         }
     }
+    printf("\nTail Nodes Key: %d\n", testL->tail->key);
+    printf("Tail Nodes Prev key: %d\n", testL->tail->prev->key);
+    printf("Tail Nodes Next Key: %d\n", testL->tail->next->key);
 
 }
