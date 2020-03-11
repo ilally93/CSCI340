@@ -4,14 +4,15 @@ a makefile or README.
 1. Broken Code
 In the Broken.c file there are two (at least) problems with how concurrency is implemented:
 a) What is one problem?
-
+    The conditional if must change to while so that there is a continuous
+    check.
 
 b) What is the second problem?
-
+    The second problem is that we need condition variables.
 
 c) How would you fix the code? Upload a corrected file (Unbroken.c) that has been corrected with
 comments describing your correction.
-
+    Lines 40, 45, 58, 70, 71, 75, 81 have comments
 
 
 2. Double Linked List
@@ -20,6 +21,8 @@ Produce a new version of the example that uses a doubly linked list (Double.c). 
 Double.c file with the definitions of the list (minus any locks, control variables or semaphores required). The
 starter file also includes skeletons for the functions you will need to write as well as providing some sort of
 main function to test your list. Upload the completed Double.c file.
+
+
 3. Multiple Wait.
 It’s frequently necessary to wait on more than a single event and be able to tell which event was the one that
 unlocked the thread. Using a control variable, construct a program that:
