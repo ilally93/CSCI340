@@ -6,7 +6,9 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
+int key = 1;
 
 // basic node structure
 
@@ -27,6 +29,14 @@ typedef struct {
     pthread_mutex_t lock;
 
 } list_t;
+
+// Thread Parameters for Testing
+struct threadInf{
+
+    list_t *list;
+    int thr;
+
+};
 
 // Initialize the list
 
@@ -59,9 +69,13 @@ void List_Insert(list_t *L,
     pthread_mutex_lock(&L->lock);
     if(L->head != NULL){
         new->next = L->head;
+        L->head->prev = new;
     }
     else{
-        new->next = L->head->next;
+        new->next = L->tail;
+        if(L->tail != NULL){
+            L->tail->prev = new;
+        }
     }
     new->prev = NULL;
     L->head = new;
@@ -74,7 +88,6 @@ void List_Insert(list_t *L,
 
 void List_Append(list_t *L,
                  int key) {
-
     // Add code here to safely insert a new node at the end of the list
     node_t *new = malloc(sizeof(node_t));
     if (new == NULL) {
@@ -83,13 +96,16 @@ void List_Append(list_t *L,
     }
 
     new->key = key;
-    printf("Key during Append: %d\n", key);
     pthread_mutex_lock(&L->lock);
     if(L->tail != NULL){
         new->prev = L->tail;
+        L->tail->next = new;
     }
     else{
-        new->prev = L->tail->prev;
+        new->prev = L->head;
+        if(L->head != NULL){
+            L->head->next = new;
+        }
     }
     new->next = NULL;
     L->tail = new;
@@ -97,67 +113,66 @@ void List_Append(list_t *L,
 
 }
 
+
 int List_Lookup(list_t *L,
                 int key) {
 
     // Add code here to lookup an item in the list
 
+    pthread_mutex_lock(&L->lock);
     node_t *curr = L->head;
-
-    while(curr){
-        pthread_mutex_lock(&L->lock);
-        printf("Curr key: %d\n", curr->key);
-        printf("Searching for: %d key\n", key);
-        if(curr->key == key){
+    while (curr) {
+        if (curr->key == key) {
             pthread_mutex_unlock(&L->lock);
             return 0;
         }
-        pthread_mutex_unlock(&L->lock);
         curr = curr->next;
     }
+    pthread_mutex_unlock(&L->lock);
 
     return -1;
 }
 
-int main()
-{
+
+int main(){
 
     // Add code here to test your list
     list_t *testL = malloc(sizeof(list_t));
-    int key = 1;
+
     if(List_Lookup(testL, key) == 0){
-        printf("Node %d Found\n\n", key);
+        printf("Node %d Found\n", key);
+        key++;
     }
     else{
-        printf("Node %d Not Found\n\n", key);
+        printf("Node %d Not Found\n", key);
         List_Insert(testL, key);
         if(List_Lookup(testL, key) == 0){
-            printf("Node %d Found After Insert\n\n", key);
+            printf("Node %d Found After Insert\n", key);
             key++;
-            printf("key After Insert: %d\n", key);
         }
         else{
-            printf("Node %d Insert Failed\n\n", key);
+            printf("Node %d Insert Failed\n", key);
+            key++;
         }
     }
 
     if(List_Lookup(testL, key) == 0){
-        printf("Node %d Found\n\n", key);
+        printf("Node %d Found\n", key);
+        key++;
     }
     else{
-        printf("Node %d Not Found\n\n", key);
+        printf("Node %d Not Found\n", key);
         List_Append(testL, key);
         if(List_Lookup(testL, key) == 0){
-            printf("Node %d Found After Append\n\n", key);
+            printf("Node %d Found After Append\n", key);
             key++;
-            printf("Key After Append: %d", key);
         }
         else{
-            printf("Node %d Append Failed\n\n", key);
+            printf("Node %d Append Failed\n", key);
+            key++;
         }
     }
-    printf("\nTail Nodes Key: %d\n", testL->tail->key);
-    printf("Tail Nodes Prev key: %d\n", testL->tail->prev->key);
-    printf("Tail Nodes Next Key: %d\n", testL->tail->next->key);
+
+    free(testL);
 
 }

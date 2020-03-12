@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 pthread_cond_t headc = PTHREAD_COND_INITIALIZER;
 pthread_cond_t tailc = PTHREAD_COND_INITIALIZER;
@@ -56,7 +57,7 @@ void Queue_Enqueue(queue_t * q,
     q->tail = tmp;                                /* Point tail to new node */
 
     // Restarts a thread waiting on the conditional
-    pthread_cond_signal(&tailc);    
+    pthread_cond_signal(&tailc);
     pthread_mutex_unlock(&q->tail_lock);
 
 }
